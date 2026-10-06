@@ -229,6 +229,15 @@ export default function Home() {
       ? selectedRoleObjects[0].name
       : "Community Member";
 
+  /*
+   * IMPORTANT:
+   * profile can be null according to TypeScript.
+   * These safe values prevent the Vercel production build error.
+   */
+  const profileAvatar = profile?.avatar ?? "";
+  const profileName = profile?.name ?? "";
+  const profileUsername = profile?.username ?? "";
+
   return (
     <main className="site-shell">
       <div className="background-grid" />
@@ -341,8 +350,8 @@ export default function Home() {
             <div className="profile-preview">
               <div className="profile-avatar">
                 <img
-                  src={profile.avatar}
-                  alt={profile.name}
+                  src={profileAvatar}
+                  alt={profileName}
                   crossOrigin="anonymous"
                 />
               </div>
@@ -350,10 +359,10 @@ export default function Home() {
               <div className="profile-info">
                 <span>CONNECTED X PROFILE</span>
 
-                <strong>{profile.name}</strong>
+                <strong>{profileName}</strong>
 
                 <small>
-                  @{profile.username}
+                  @{profileUsername}
                 </small>
               </div>
 
@@ -452,8 +461,8 @@ export default function Home() {
                   <div className="cartoon-ring">
                     <div className="cartoon-image">
                       <img
-                        src={profile.avatar}
-                        alt={`${cardName || profile.name} character`}
+                        src={profileAvatar}
+                        alt={`${cardName || profileName} character`}
                         crossOrigin="anonymous"
                       />
                     </div>
@@ -476,11 +485,11 @@ export default function Home() {
                   <span>COMMUNITY CHARACTER</span>
 
                   <strong>
-                    {cardName || profile.name}
+                    {cardName || profileName}
                   </strong>
 
                   <small>
-                    @{cardUsername || profile.username}
+                    @{cardUsername || profileUsername}
                   </small>
 
                   <div className="character-style">
@@ -606,7 +615,6 @@ export default function Home() {
             </div>
           ) : (
             <div className="card-stage">
-
               {/* =========================
                   IDENTITY CARD
               ========================= */}
@@ -703,7 +711,7 @@ export default function Home() {
                     <div className="character-ring">
                       <div className="character-inner">
                         <img
-                          src={profile.avatar}
+                          src={profileAvatar}
                           alt={`${cardName} character`}
                           crossOrigin="anonymous"
                         />
